@@ -29,5 +29,5 @@ jobs:
           git remote set-url origin https://x-access-token:${{ secrets.AEV_OSS_TOKEN }}@github.com/$GITHUB_REPOSITORY
           git checkout "${GITHUB_REF:11}"
           git add docs
-          git commit -am "automated docs build"
+          git diff --exit-code && git commit -am "automated docs build"  || echo unable to commit changes or no changes found
           git push origin
