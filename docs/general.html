@@ -239,7 +239,7 @@ The difference is best illustrated with the Conan info command for generating a 
 </div>
 <div class="section" id="use-cases-covered-by-the-adtf2generator">
 <h1><a class="toc-backref" href="#id4">Use cases covered by the ADTF2Generator</a><a class="headerlink" href="#use-cases-covered-by-the-adtf2generator" title="Permalink to this headline">¶</a></h1>
-<p>The ADTF2Generator uses the official package description (<cite>package_info()</cite>) to determine all paths to relevant dependencies, and generates all required files (ADTF manifests, globals.xml and start scripts) for each ADTF configuration. To do this, the packages have to provide the information explicitly, i.e. an ADTF plugin package has to explicitly define the paths to the <cite>.plb</cite> files, an ADTF service package has to explicitly define the paths to the <cite>.manifest`(s), an ADTF configuration has to explicitly define the paths to the `.prj</cite> and/or <cite>system.xml</cite> file, as well as other optional settings. Automatic determining of paths (e.g. by mindlessly searching all packages for <cite>*.plb</cite> or <cite>*.manifest</cite> or <cite>*.prj</cite>) was omitted, as libraries or executables also have to be defined explicitly in Conan.</p>
+<p>The ADTF2Generator uses the official package description (<cite>package_info()</cite>) to determine all paths to relevant dependencies, and generates all required files (ADTF manifests, globals.xml and start scripts) for each ADTF configuration. To do this, the packages have to provide the information explicitly, i.e. an ADTF plugin package has to explicitly define the paths to the <cite>.plb</cite> files, an ADTF service package has to explicitly define the paths to the <cite>*.manifest</cite> , an ADTF configuration has to explicitly define the paths to the <cite>*.prj</cite> and/or <cite>system.xml</cite> file, as well as other optional settings. Automatic determining of paths (e.g. by mindlessly searching all packages for <cite>*.plb</cite> or <cite>*.manifest</cite> or <cite>*.prj</cite>) was omitted, as libraries or executables also have to be defined explicitly in Conan.</p>
 <div class="section" id="installing-and-starting-a-published-adtf-configuration">
 <h2><a class="toc-backref" href="#id5">Installing and starting a published ADTF configuration</a><a class="headerlink" href="#installing-and-starting-a-published-adtf-configuration" title="Permalink to this headline">¶</a></h2>
 <p>The user wants to download an already published ADTF configuration to their own computer and start it. It therefore has to be ensured that all dependencies that use the package_info() to explicitly identify themselves as ADTF filter, ADTF service and/or ADTF configuration, are determined and that their paths are correctly entered into the files to be generated.</p>
@@ -310,7 +310,7 @@ For usage of a custom <cite>globals.xml</cite> see “Definition of an ADTF proj
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Audi Electtronics Venture GmbH
+        &copy; Copyright 2019, Audi Electronics Venture GmbH
 
     </p>
   </div>

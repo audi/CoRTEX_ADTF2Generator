@@ -215,7 +215,7 @@
 <div class="section" id="referencing-the-generator-in-a-recipe">
 <h2><a class="toc-backref" href="#id2">Referencing the generator in a recipe</a><a class="headerlink" href="#referencing-the-generator-in-a-recipe" title="Permalink to this headline">¶</a></h2>
 <p>To be able to use the ADTF2Generator in a recipe, it first has to be defined as a dependency. This is usually done in the recipe for an ADTF configuration. Then the generator is specified. The virtual generator is optional here, as – if it exists – it is used internally by the ADTF2Generator to generate the “activate” and “deactivate” scripts.</p>
-<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">requires</span> <span class="o">=</span> <span class="s1">&#39;ADTF2Generator/[1]@CoRTEX/stable&#39;</span>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;ADTF2Generator/[1]@CoRTEX/stable&quot;</span>
 <span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;ADTF2Generator&quot;</span><span class="p">,</span> <span class="s2">&quot;virtualenv&quot;</span>
 </pre></div>
 </div>
@@ -440,7 +440,7 @@
 
   <div role="contentinfo">
     <p>
-        &copy; Copyright 2019, Audi Electtronics Venture GmbH
+        &copy; Copyright 2019, Audi Electronics Venture GmbH
 
     </p>
   </div>
