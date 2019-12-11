@@ -195,9 +195,9 @@ class ADTF2Generator(Generator):
             
             for prop in properties:
                 name = prop.getAttribute("name")
-                if name == 'media_description_files':
-                    oldVal = prop.getAttribute('value')
-                    prop.setAttribute('value', oldVal + (";" if len(self.ADTF_descriptions) > 0 else "") + ";".join(self.ADTF_descriptions))
+                if name == "media_description_files":
+                    oldVal = prop.getAttribute("value")
+                    prop.setAttribute("value", oldVal + (";" if len(self.ADTF_descriptions) > 0 else "") + ";".join(self.ADTF_descriptions))
         
         plugins_group = dom.getElementsByTagName("plugins")
         if len(plugins_group) > 0:
@@ -205,15 +205,15 @@ class ADTF2Generator(Generator):
             for plg in plugins:
                 plugins_group[0].removeChild(plg)
                 plg.unlink()
-            adtf_bin_plugins = dom.createElement('plugin')
-            adtf_bin_plugins.setAttribute('optional', 'true')
-            adtf_bin_plugins.setAttribute('url', self.ADTF_bin_dir + "/*.plb")
+            adtf_bin_plugins = dom.createElement("plugin")
+            adtf_bin_plugins.setAttribute("optional", "true")
+            adtf_bin_plugins.setAttribute("url", self.ADTF_bin_dir + "/*.plb")
             plugins_group[0].appendChild(adtf_bin_plugins)
             
             for adtf_plugins in self.ADTF_plugins:
-                new_plugin = dom.createElement('plugin')
-                new_plugin.setAttribute('optional', 'true')
-                new_plugin.setAttribute('url', adtf_plugins.replace("\\", "/"))
+                new_plugin = dom.createElement("plugin")
+                new_plugin.setAttribute("optional", "true")
+                new_plugin.setAttribute("url", adtf_plugins.replace("\\", "/"))
                 plugins_group[0].appendChild(new_plugin)
         
         result = dom.toprettyxml().replace("<?xml version=\"1.0\" ?>", "<?xml version=\"1.0\" encoding=\"iso-8859-1\" standalone=\"no\"?>\n")
@@ -233,7 +233,7 @@ class ADTF2Generator(Generator):
             plugins = plugins_group[0].getElementsByTagName("plugin")
             
             for plugin in plugins:
-                oldVal = plugin.getAttribute('url')
+                oldVal = plugin.getAttribute("url")
                 plugin.setAttribute("url", self.ADTF_bin_dir + "/" + oldVal)
         
         manifests_group = dom.getElementsByTagName("manifests")
@@ -244,23 +244,23 @@ class ADTF2Generator(Generator):
                 manifest.unlink()
                     
             for adtf_manifests in self.ADTF_manifests:
-                new_manifest = dom.createElement('manifest')
-                new_manifest.setAttribute('optional', 'false')
-                new_manifest.setAttribute('url', adtf_manifests.replace("\\", "/"))
+                new_manifest = dom.createElement("manifest")
+                new_manifest.setAttribute("optional", "false")
+                new_manifest.setAttribute("url", adtf_manifests.replace("\\", "/"))
                 manifests_group[0].appendChild(new_manifest)
         
         environment_group = dom.getElementsByTagName("environment")
         if len(environment_group) == 0:
-            environment = dom.createElement('environment')
+            environment = dom.createElement("environment")
             root = dom.getElementsByTagName("adtf:manifest")
             root[0].appendChild(environment)
         else:
             environment = environment_group[0]
         
         for dep_name, dep_dir in self.deps_dirs.items():
-            var = dom.createElement('variable')
-            var.setAttribute('name', dep_name + "_MODULE_PATH")
-            var.setAttribute('value', dep_dir.replace('\\', '/'))
+            var = dom.createElement("variable")
+            var.setAttribute("name", dep_name + "_MODULE_PATH")
+            var.setAttribute("value", dep_dir.replace('\\', '/'))
             environment.appendChild(var)
         
         result = dom.toprettyxml().replace("<?xml version=\"1.0\" ?>", "<?xml version=\"1.0\" encoding=\"iso-8859-1\" standalone=\"no\"?>\n")
@@ -354,22 +354,22 @@ class ADTF2Generator(Generator):
             pass
         
         for folders in folders_group:
-            if folders.getAttribute('name') == "project_tree":
+            if folders.getAttribute("name") == "project_tree":
                 subfolder_group = folders.getElementsByTagName("folder")
                 for subfolder in subfolder_group:
-                    if subfolder.getAttribute('name') == "templates":
-                        templates_group = subfolder.getElementsByTagName('templates')
+                    if subfolder.getAttribute("name") == "templates":
+                        templates_group = subfolder.getElementsByTagName("templates")
                         for template in templates_group:
-                            old_val = template.getAttribute('url')
+                            old_val = template.getAttribute("url")
                             template.setAttribute("url", self.ADTF_bin_dir + "/" + old_val)
                         
                         for dep_name, dep_dir in self.deps_dirs.items():
                             templ_path = dep_dir.replace("\\", "/") + "/bin/templates"
                             if not dep_name == "ADTF" and os.path.exists(templ_path):
-                                new_templates = dom.createElement('templates')
-                                new_templates.setAttribute('optional', 'true')
-                                new_templates.setAttribute('url', templ_path)
-                                new_templates.setAttribute('name', dep_name)
+                                new_templates = dom.createElement("templates")
+                                new_templates.setAttribute("optional", "true")
+                                new_templates.setAttribute("url", templ_path)
+                                new_templates.setAttribute("name", dep_name)
                                 subfolder.appendChild(new_templates)
         
         result = dom.toprettyxml().replace("<?xml version=\"1.0\" ?>", "<?xml version=\"1.0\" encoding=\"iso-8859-1\" standalone=\"no\"?>\n")
@@ -439,7 +439,6 @@ class ADTF2Generator(Generator):
                 for the_globals in globals2use:
                     # the globals in ADTF_bin_dir do not have a parent directory
                     if os.path.dirname(the_globals):
-                    #if self.ADTF_bin_dir.replace("\\", "/") not in the_globals.replace("\\", "/"):
                         if not os.path.exists(the_globals):
                             raise ConanException("The globals file %s can't be found." % the_globals)
                         globals_list.append(the_globals)
@@ -470,7 +469,7 @@ class ADTF2Generator(Generator):
                     content = self.generate_globals(globals_xml)
                     result[name] = content
                 
-                nameSplit = os.path.basename(manifest).split('.')
+                nameSplit = os.path.basename(manifest).split(".")
                 nameSplit[0] = nameSplit[0] + config_name
                 
                 # define the file name
@@ -481,7 +480,7 @@ class ADTF2Generator(Generator):
                 
                 # try to find matching settings files
                 for settings_file in glob.glob(os.path.join(self.ADTF_bin_dir, manifest.replace(".manifest", "*.settings"))):
-                    nameSplit = os.path.basename(settings_file).split('.')
+                    nameSplit = os.path.basename(settings_file).split(".")
                     nameSplit[0] = nameSplit[0] + config_name
                     # create the name
                     name = os.path.join(self.generate_2_dir, ".".join(nameSplit))
@@ -491,7 +490,7 @@ class ADTF2Generator(Generator):
                 
                 # try to find matching layout files 
                 for layout in glob.glob(os.path.join(self.ADTF_bin_dir, manifest.replace(".manifest", "*.systemlayout"))):
-                    nameSplit = os.path.basename(layout).split('.')
+                    nameSplit = os.path.basename(layout).split(".")
                     nameSplit[0] = nameSplit[0] + config_name
                     # create the name
                     name = os.path.join(self.generate_2_dir, ".".join(nameSplit))

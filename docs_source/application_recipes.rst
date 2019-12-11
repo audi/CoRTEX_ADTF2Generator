@@ -17,7 +17,7 @@ To be able to use the ADTF2Generator in a recipe, it first has to be defined as 
 
 .. code-block:: python
 
-    requires = 'ADTF2Generator/[1]@CoRTEX/stable'
+    requires = "ADTF2Generator/[1]@CoRTEX/stable"
     generators = "ADTF2Generator", "virtualenv"
 
 

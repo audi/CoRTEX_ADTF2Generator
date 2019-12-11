@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'CoRTEX-ADTF2Generator'
-copyright = '2019, Audi Electtronics Venture GmbH'
+copyright = '2019, Audi Electronics Venture GmbH'
 author = 'Alexander Hanl'
 
 # The full version, including alpha/beta/rc tags
