@@ -21,4 +21,5 @@ help:
 	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 	rm -rf $(DOCSDIR) && \
 	cp -rT $(BUILDDIR)/html $(DOCSDIR) && \
+	touch $(DOCSDIR)/.nojekyll && \
 	rm $(DOCSDIR)/.buildinfo
