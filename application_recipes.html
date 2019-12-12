@@ -1,0 +1,474 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Application in Conan recipes &mdash; CoRTEX-ADTF2Generator 1.1.2 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/CoRTEX_icon.png"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Copyright / License information" href="license.html" />
+    <link rel="prev" title="General information" href="general.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> CoRTEX-ADTF2Generator
+          
+
+          
+            
+            <img src="_static/CoRTEX_icon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="general.html">General information</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="general.html#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html#preamble">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html#conclusion">Conclusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html#application-example">Application example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="general.html#use-cases-covered-by-the-adtf2generator">Use cases covered by the ADTF2Generator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="general.html#installing-and-starting-a-published-adtf-configuration">Installing and starting a published ADTF configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="general.html#editing-a-local-adtf-configuration">Editing a local ADTF configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Application in Conan recipes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#referencing-the-generator-in-a-recipe">Referencing the generator in a recipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#definition-of-an-adtf-project">Definition of an ADTF project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#definition-of-adtf-filters-plugins">Definition of ADTF filters/plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#definition-of-adtf-services">Definition of ADTF services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#definition-of-adtf-custom-manifests-own-adtf-launcher-manifests">Definition of ADTF custom manifests (own ADTF launcher manifests)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#definition-of-adtf-description-ddl-files">Definition of ADTF description (DDL) files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#definition-of-manifest-dependencies-to-be-removed">Definition of manifest dependencies to be removed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#definition-of-plugin-dependencies-to-be-removed">Definition of plugin dependencies to be removed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#definition-of-description-dependencies-to-be-removed">Definition of description dependencies to be removed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#definition-of-project-dependencies-to-be-removed">Definition of project dependencies to be removed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#definition-of-custom-manifest-dependencies-to-be-removed-own-adtf-launcher-manifests">Definition of custom manifest dependencies to be removed (own ADTF launcher manifests)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#use-of-adtf-subconfigurations">Use of ADTF subconfigurations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#option-1-integration-through-relative-paths">Option 1: integration through relative paths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#option-2-integration-through-environment-variables">Option 2: integration through environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Copyright / License information</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CoRTEX-ADTF2Generator</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>Application in Conan recipes</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/application_recipes.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="application-in-conan-recipes">
+<h1><a class="toc-backref" href="#id1">Application in Conan recipes</a><a class="headerlink" href="#application-in-conan-recipes" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#application-in-conan-recipes" id="id1">Application in Conan recipes</a></p>
+<ul>
+<li><p><a class="reference internal" href="#referencing-the-generator-in-a-recipe" id="id2">Referencing the generator in a recipe</a></p></li>
+<li><p><a class="reference internal" href="#definition-of-an-adtf-project" id="id3">Definition of an ADTF project</a></p></li>
+<li><p><a class="reference internal" href="#definition-of-adtf-filters-plugins" id="id4">Definition of ADTF filters/plugins</a></p></li>
+<li><p><a class="reference internal" href="#definition-of-adtf-services" id="id5">Definition of ADTF services</a></p></li>
+<li><p><a class="reference internal" href="#definition-of-adtf-custom-manifests-own-adtf-launcher-manifests" id="id6">Definition of ADTF custom manifests (own ADTF launcher manifests)</a></p></li>
+<li><p><a class="reference internal" href="#definition-of-adtf-description-ddl-files" id="id7">Definition of ADTF description (DDL) files</a></p></li>
+<li><p><a class="reference internal" href="#definition-of-manifest-dependencies-to-be-removed" id="id8">Definition of manifest dependencies to be removed</a></p></li>
+<li><p><a class="reference internal" href="#definition-of-plugin-dependencies-to-be-removed" id="id9">Definition of plugin dependencies to be removed</a></p></li>
+<li><p><a class="reference internal" href="#definition-of-description-dependencies-to-be-removed" id="id10">Definition of description dependencies to be removed</a></p></li>
+<li><p><a class="reference internal" href="#definition-of-project-dependencies-to-be-removed" id="id11">Definition of project dependencies to be removed</a></p></li>
+<li><p><a class="reference internal" href="#definition-of-custom-manifest-dependencies-to-be-removed-own-adtf-launcher-manifests" id="id12">Definition of custom manifest dependencies to be removed (own ADTF launcher manifests)</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#use-of-adtf-subconfigurations" id="id13">Use of ADTF subconfigurations</a></p>
+<ul>
+<li><p><a class="reference internal" href="#option-1-integration-through-relative-paths" id="id14">Option 1: integration through relative paths</a></p></li>
+<li><p><a class="reference internal" href="#option-2-integration-through-environment-variables" id="id15">Option 2: integration through environment variables</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="referencing-the-generator-in-a-recipe">
+<h2><a class="toc-backref" href="#id2">Referencing the generator in a recipe</a><a class="headerlink" href="#referencing-the-generator-in-a-recipe" title="Permalink to this headline">¶</a></h2>
+<p>To be able to use the ADTF2Generator in a recipe, it first has to be defined as a dependency. This is usually done in the recipe for an ADTF configuration. Then the generator is specified. The virtual generator is optional here, as – if it exists – it is used internally by the ADTF2Generator to generate the “activate” and “deactivate” scripts.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;ADTF2Generator/[1]@CoRTEX/stable&quot;</span>
+<span class="n">generators</span> <span class="o">=</span> <span class="s2">&quot;ADTF2Generator&quot;</span><span class="p">,</span> <span class="s2">&quot;virtualenv&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="definition-of-an-adtf-project">
+<h2><a class="toc-backref" href="#id3">Definition of an ADTF project</a><a class="headerlink" href="#definition-of-an-adtf-project" title="Permalink to this headline">¶</a></h2>
+<p>An ADTF project has to be defined using the package_info() method. This is done as a list of dictionaries, as the recipe or package could also include multiple configurations.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># define the list of dictionaries which describe the ADTF project and what to generate</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">user_info</span><span class="o">.</span><span class="n">ADTF_PROJECTS</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;PROJECT_PATH&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span><span class="p">,</span> <span class="s2">&quot;my_project_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;my_project_name.prj&quot;</span><span class="p">),</span>
+                                    <span class="s2">&quot;CONFIG_PATH&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span><span class="p">,</span> <span class="s2">&quot;my_project_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="s2">&quot;system.xml&quot;</span><span class="p">),</span>
+                                    <span class="s2">&quot;MANIFESTS_USE&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;adtf_devenv.manifest&quot;</span><span class="p">,</span> <span class="s2">&quot;adtf_runtime.manifest&quot;</span><span class="p">],</span>
+                                    <span class="s2">&quot;START_PARAMETER&quot;</span><span class="p">:</span> <span class="s2">&quot;-run&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;GLOBALS_USE&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;globals.xml&quot;</span><span class="p">]}]</span>
+</pre></div>
+</div>
+<p>The following parameters are defined in the example above:</p>
+<ul class="simple">
+<li><p><strong>PROJECT_PATH</strong>: Indicates the full path to the ADTF project</p></li>
+<li><p><strong>CONFIG_PATH</strong>: (Optional) Indicates the full path to the system.xml. This is usually only required for the adtf_console, however, as this configuration includes no ADTF project tree that could load projects.</p></li>
+<li><p><strong>MANIFESTS_USE</strong>: (Optional) This can be used to control which start scripts are to be generated for the project. If this is not set, all ADTF start manifests from the ADTF bin directory are used as a basis and a start script is generated for each.</p></li>
+<li><p><strong>START_PARAMETER</strong>: (Optional) This can be used to transfer additional parameters for each project to ADTF (e.g. -run, -stdout -quit, -active, etc.; refer to the ADTF documentation for this).</p></li>
+<li><p><strong>GLOBALS_USE</strong>: (Optional) ADTF itself delivery two globals.xml files, one for the GUI and one for the console application. If this value is restricted to “globals.xml”, no adtf_console start script is generated, even if it is defined under MANIFESTS_USE. Additionally (with version 1.1.1 of the Generator) one can define an absolute path to a custom globals.xml which should be stored alongside with the project.</p></li>
+</ul>
+<p>The following is an example for several ADTF configurations within a package.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># define the list of dictionaries which describe the ADTF project and what to generate</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">user_info</span><span class="o">.</span><span class="n">ADTF_PROJECTS</span><span class="o">=</span><span class="p">[{</span><span class="s2">&quot;PROJECT_PATH&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span><span class="p">,</span> <span class="s2">&quot;my_project_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;my_project_name.prj&quot;</span><span class="p">),</span>
+                                    <span class="s2">&quot;CONFIG_PATH&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span><span class="p">,</span> <span class="s2">&quot;my_project_directory&quot;</span><span class="p">,</span> <span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="s2">&quot;system.xml&quot;</span><span class="p">),</span>
+                                    <span class="s2">&quot;MANIFESTS_USE&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;adtf_devenv.manifest&quot;</span><span class="p">,</span> <span class="s2">&quot;adtf_runtime.manifest&quot;</span><span class="p">],</span>
+                                    <span class="s2">&quot;START_PARAMETER&quot;</span><span class="p">:</span> <span class="s2">&quot;-run&quot;</span><span class="p">,</span>
+                                    <span class="s2">&quot;GLOBALS_USE&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;globals.xml&quot;</span><span class="p">]},</span>
+                                <span class="p">{</span><span class="s2">&quot;PROJECT_PATH&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span><span class="p">,</span> <span class="s2">&quot;my_project_directory2&quot;</span><span class="p">,</span> <span class="s2">&quot;my_project_name2.prj&quot;</span><span class="p">),</span>
+                                    <span class="s2">&quot;CONFIG_PATH&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span><span class="p">,</span> <span class="s2">&quot;my_project_directory2&quot;</span><span class="p">,</span> <span class="s2">&quot;config&quot;</span><span class="p">,</span> <span class="s2">&quot;system.xml&quot;</span><span class="p">),</span>
+                                    <span class="s2">&quot;MANIFESTS_USE&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;adtf_runtime.manifest&quot;</span><span class="p">],</span>
+                                    <span class="s2">&quot;START_PARAMETER&quot;</span><span class="p">:</span> <span class="s2">&quot;&quot;</span><span class="p">}]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="definition-of-adtf-filters-plugins">
+<h2><a class="toc-backref" href="#id4">Definition of ADTF filters/plugins</a><a class="headerlink" href="#definition-of-adtf-filters-plugins" title="Permalink to this headline">¶</a></h2>
+<p>Only the description of the plugin path is required for an ADTF filter. This is generated into the respective <cite>globals.xml</cite>. This once again includes a list, so multiple plugins can be referenced.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The ADTF notation (with <cite>*.plb</cite> or <cite>**.plb</cite>) can be used as these values are entered directly without resolving them again first.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">env_info</span><span class="o">.</span><span class="n">MY_PACKAGE_DIR</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">user_info</span><span class="o">.</span><span class="n">ADTF_PLUGINS</span><span class="o">=</span><span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span><span class="p">,</span> <span class="s2">&quot;bin&quot;</span><span class="p">,</span> <span class="s2">&quot;*.plb&quot;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="definition-of-adtf-services">
+<h2><a class="toc-backref" href="#id5">Definition of ADTF services</a><a class="headerlink" href="#definition-of-adtf-services" title="Permalink to this headline">¶</a></h2>
+<p>An ADTF service always describes itself and its plugin in a manifest. Therefore, only the path to the <cite>.manifest</cite> has to be defined for an ADTF service. Once again, the paths are not evaluated further, and can therefore be made directly in ADTF notation.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">user_info</span><span class="o">.</span><span class="n">ADTF_MANIFESTS</span><span class="o">=</span><span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span><span class="p">,</span> <span class="s2">&quot;bin&quot;</span><span class="p">,</span> <span class="s2">&quot;*.manifest&quot;</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="definition-of-adtf-custom-manifests-own-adtf-launcher-manifests">
+<h2><a class="toc-backref" href="#id6">Definition of ADTF custom manifests (own ADTF launcher manifests)</a><a class="headerlink" href="#definition-of-adtf-custom-manifests-own-adtf-launcher-manifests" title="Permalink to this headline">¶</a></h2>
+<p>Two different types have to be distinguished for ADTF manifests.</p>
+<ol class="arabic simple">
+<li><p>ADTF service manifest: describes an individual service or multiple services, and is included by the launcher manifest. It is not possible to start a complete ADTF session with a conventional ADTF service manifest.</p></li>
+<li><p>ADTF launcher manifest: describes an ADTF basic system consisting of the ADTF core services that are mandatory, and includes additional ADTF service manifests for ADTF services originating from other packages.</p></li>
+</ol>
+<p>The latter (i.e. the starting point for ADTF) can also originate from other packages than ADTF itself (also refer to the examples “custom_runtime_manifest”).</p>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>Only the services from the ADTF package itself can be referenced. The ADTF_MANIFESTS have to be used for all additional services and their paths.</p>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># define the path to the customized ADTF manifest</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">user_info</span><span class="o">.</span><span class="n">ADTF_CUSTOM_MANIFESTS</span><span class="o">=</span><span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span><span class="p">,</span> <span class="s2">&quot;custom_runtime.manifest&quot;</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>The manifest package then only has to be included in the dependency tree to be considered by the generator (e.g. as a dependency of an ADTF configuration).</p>
+</div>
+<div class="section" id="definition-of-adtf-description-ddl-files">
+<h2><a class="toc-backref" href="#id7">Definition of ADTF description (DDL) files</a><a class="headerlink" href="#definition-of-adtf-description-ddl-files" title="Permalink to this headline">¶</a></h2>
+<p>ADTF uses description files (DDL - Data Definition Language) for describing data structures. These can be defined as follows, to then be included into the launcher manifests.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># define the path to the description file</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">user_info</span><span class="o">.</span><span class="n">ADTF_DESCRIPTIONS</span><span class="o">=</span><span class="p">[</span><span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span><span class="p">,</span> <span class="s2">&quot;simple_adtf.description&quot;</span><span class="p">)]</span>
+</pre></div>
+</div>
+<p>The description package then only has to be included in the dependency tree to be considered by the generator (e.g. as a dependency of an ADTF configuration).</p>
+</div>
+<div class="section" id="definition-of-manifest-dependencies-to-be-removed">
+<h2><a class="toc-backref" href="#id8">Definition of manifest dependencies to be removed</a><a class="headerlink" href="#definition-of-manifest-dependencies-to-be-removed" title="Permalink to this headline">¶</a></h2>
+<p>In some use cases, it can be practical to remove manifests (e.g. from ADTF tool boxes) from the overall configuration, and then replace them with custom manifests.</p>
+<p>To do so, only the following must be entered to remove manifests:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># just define the name of the dependency which manifests should not be added or should be removed</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">user_info</span><span class="o">.</span><span class="n">ADTF_REMOVE_MANIFESTS_DEPS</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ADTFDeviceToolbox&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For this, only the name(s) of the manifest dependencies to be removed must be stated in the form of a list.</p>
+</div>
+<div class="section" id="definition-of-plugin-dependencies-to-be-removed">
+<h2><a class="toc-backref" href="#id9">Definition of plugin dependencies to be removed</a><a class="headerlink" href="#definition-of-plugin-dependencies-to-be-removed" title="Permalink to this headline">¶</a></h2>
+<p>In some use cases, it can be practical to remove plugins (e.g. from ADTF tool boxes) from the overall ADTF configuration, and then replace them with a custom plugins list.</p>
+<p>Only the following must be entered to remove plugins:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># just define the name of the dependency which plugins should not be added or should be removed</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">user_info</span><span class="o">.</span><span class="n">ADTF_REMOVE_PLUGINS_DEPS</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ADTFDeviceToolbox&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For this, only the name(s) of the plugin dependencies to be removed has to be stated, in the form of a list.</p>
+</div>
+<div class="section" id="definition-of-description-dependencies-to-be-removed">
+<h2><a class="toc-backref" href="#id10">Definition of description dependencies to be removed</a><a class="headerlink" href="#definition-of-description-dependencies-to-be-removed" title="Permalink to this headline">¶</a></h2>
+<p>In some use cases, it can be practical to remove descriptions (e.g. from ADTF tool boxes) from the overall ADTF configuration, and then replace them with own descriptions.</p>
+<p>Only the following must be entered to remove descriptions:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># just define the name of the dependency which descriptions should not be added or should be removed</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">user_info</span><span class="o">.</span><span class="n">ADTF_REMOVE_DESCRIPTIONS_DEPS</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ADTFDeviceToolbox&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For this, only the name(s) of the description dependencies to be removed must be stated, in the form of a list.</p>
+</div>
+<div class="section" id="definition-of-project-dependencies-to-be-removed">
+<h2><a class="toc-backref" href="#id11">Definition of project dependencies to be removed</a><a class="headerlink" href="#definition-of-project-dependencies-to-be-removed" title="Permalink to this headline">¶</a></h2>
+<p>In some use cases, it can be practical to remove projects (e.g. from ADTF tool boxes) from the overall ADTF configuration, and then replace them with own projects.</p>
+<p>Only the following must be entered to remove projects:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># just define the name of the dependency which projects should not be added or should be removed</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">user_info</span><span class="o">.</span><span class="n">ADTF_REMOVE_PROJECTS_DEPS</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;ADTFDeviceToolbox&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For this, only the name(s) of the project dependencies to be removed must be stated, in the form of a list.</p>
+</div>
+<div class="section" id="definition-of-custom-manifest-dependencies-to-be-removed-own-adtf-launcher-manifests">
+<h2><a class="toc-backref" href="#id12">Definition of custom manifest dependencies to be removed (own ADTF launcher manifests)</a><a class="headerlink" href="#definition-of-custom-manifest-dependencies-to-be-removed-own-adtf-launcher-manifests" title="Permalink to this headline">¶</a></h2>
+<p>In some use cases, it can be practical to remove custom manifests from the overall ADTF configuration and then replace them with own custom manifests.</p>
+<p>Only the following must be entered to remove custom manifests:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+    <span class="c1"># just define the name of the dependency which projects should not be added or should be removed</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">user_info</span><span class="o">.</span><span class="n">ADTF_REMOVE_CUSTOM_MANIFESTS_DEPS</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;MyCustomManifestPackage&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+<p>For this, only the name(s) of the custom manifest dependencies to be removed must be stated, in the form of a list.</p>
+</div>
+</div>
+<div class="section" id="use-of-adtf-subconfigurations">
+<h1><a class="toc-backref" href="#id13">Use of ADTF subconfigurations</a><a class="headerlink" href="#use-of-adtf-subconfigurations" title="Permalink to this headline">¶</a></h1>
+<p>There are two options for integrating/using ADTF2 subconfigurations. The choice depends on the “main system.xml” and how it integrates the subconfiguration.</p>
+<div class="section" id="option-1-integration-through-relative-paths">
+<h2><a class="toc-backref" href="#id14">Option 1: integration through relative paths</a><a class="headerlink" href="#option-1-integration-through-relative-paths" title="Permalink to this headline">¶</a></h2>
+<p>If the subconfiguration is integrated in the “main system.xml” with a relative path, the subconfiguration has to be copied/imported into the main configuration. This can be achieved with the Conan <cite>imports()</cite> method.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span> <span class="nc">ADTF2MainConfigConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ADTF2MainConfig&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.0.0&quot;</span>
+    <span class="n">build_requires</span> <span class="o">=</span> <span class="s2">&quot;ADTF2SubConfig/1.0.0@user/testing&quot;</span>
+    <span class="n">keep_imports</span> <span class="o">=</span> <span class="kc">True</span>
+
+    <span class="k">def</span> <span class="nf">imports</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="n">pattern</span><span class="o">=</span><span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="n">dst</span><span class="o">=</span><span class="s2">&quot;path/to/subconfig&quot;</span><span class="p">,</span> <span class="n">src</span><span class="o">=</span><span class="s2">&quot;probably/not/required/to/define&quot;</span><span class="p">,</span> <span class="n">root_package</span><span class="o">=</span><span class="s2">&quot;ADTF2SubConfig&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">package</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<div class="admonition important">
+<p class="admonition-title">Important</p>
+<p>If the subconfiguration includes dependencies to ADTF2 filters, services, descriptions or other packages, these have to be transferred to the main configuration, because the use of <cite>build_requires</cite> “interrupts” the dependency tree.</p>
+</div>
+</div>
+<div class="section" id="option-2-integration-through-environment-variables">
+<h2><a class="toc-backref" href="#id15">Option 2: integration through environment variables</a><a class="headerlink" href="#option-2-integration-through-environment-variables" title="Permalink to this headline">¶</a></h2>
+<p>The much neater variant is to integrate the subconfiguration in the main configuration using environment variables. This means that the subconfiguration only has to be defined as a requirement, and the <cite>package_info</cite> of the subconfiguration has to define the environment variable.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span> <span class="nc">ADTF2MainConfigConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ADTF2MainConfig&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.0.0&quot;</span>
+    <span class="n">requires</span> <span class="o">=</span> <span class="s2">&quot;ADTF2SubConfig/1.0.0@user/testing&quot;</span>
+
+    <span class="k">def</span> <span class="nf">package</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">conans</span> <span class="kn">import</span> <span class="n">ConanFile</span>
+
+<span class="k">class</span> <span class="nc">ADTF2SubConfigConan</span><span class="p">(</span><span class="n">ConanFile</span><span class="p">):</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;ADTF2SubConfig&quot;</span>
+    <span class="n">version</span> <span class="o">=</span> <span class="s2">&quot;1.0.0&quot;</span>
+
+    <span class="k">def</span> <span class="nf">package</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">copy</span><span class="p">(</span><span class="s2">&quot;*&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">package_info</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">env_info</span><span class="o">.</span><span class="n">vars</span><span class="p">[</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2">_DIR&quot;</span> <span class="o">%</span> <span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">upper</span><span class="p">()]</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">package_folder</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\\</span><span class="s2">&quot;</span><span class="p">,</span> <span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="o">...</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="license.html" class="btn btn-neutral float-right" title="Copyright / License information" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="general.html" class="btn btn-neutral float-left" title="General information" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Audi Electronics Venture GmbH
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

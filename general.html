@@ -1,0 +1,356 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>General information &mdash; CoRTEX-ADTF2Generator 1.1.2 documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/CoRTEX_icon.png"/>
+  
+  
+  
+
+  
+  <script type="text/javascript" src="_static/js/modernizr.min.js"></script>
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+        <script type="text/javascript" src="_static/jquery.js"></script>
+        <script type="text/javascript" src="_static/underscore.js"></script>
+        <script type="text/javascript" src="_static/doctools.js"></script>
+        <script type="text/javascript" src="_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+
+    
+
+  
+  <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Application in Conan recipes" href="application_recipes.html" />
+    <link rel="prev" title="CoRTEX - ADTF2Generator" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="index.html" class="icon icon-home"> CoRTEX-ADTF2Generator
+          
+
+          
+            
+            <img src="_static/CoRTEX_icon.png" class="logo" alt="Logo"/>
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.1.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">General information</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#prerequisites">Prerequisites</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#preamble">Preamble</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#conclusion">Conclusion</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#application-example">Application example</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="#use-cases-covered-by-the-adtf2generator">Use cases covered by the ADTF2Generator</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-and-starting-a-published-adtf-configuration">Installing and starting a published ADTF configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#editing-a-local-adtf-configuration">Editing a local ADTF configuration</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="application_recipes.html">Application in Conan recipes</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="application_recipes.html#referencing-the-generator-in-a-recipe">Referencing the generator in a recipe</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application_recipes.html#definition-of-an-adtf-project">Definition of an ADTF project</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application_recipes.html#definition-of-adtf-filters-plugins">Definition of ADTF filters/plugins</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application_recipes.html#definition-of-adtf-services">Definition of ADTF services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application_recipes.html#definition-of-adtf-custom-manifests-own-adtf-launcher-manifests">Definition of ADTF custom manifests (own ADTF launcher manifests)</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application_recipes.html#definition-of-adtf-description-ddl-files">Definition of ADTF description (DDL) files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application_recipes.html#definition-of-manifest-dependencies-to-be-removed">Definition of manifest dependencies to be removed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application_recipes.html#definition-of-plugin-dependencies-to-be-removed">Definition of plugin dependencies to be removed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application_recipes.html#definition-of-description-dependencies-to-be-removed">Definition of description dependencies to be removed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application_recipes.html#definition-of-project-dependencies-to-be-removed">Definition of project dependencies to be removed</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application_recipes.html#definition-of-custom-manifest-dependencies-to-be-removed-own-adtf-launcher-manifests">Definition of custom manifest dependencies to be removed (own ADTF launcher manifests)</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="application_recipes.html#use-of-adtf-subconfigurations">Use of ADTF subconfigurations</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="application_recipes.html#option-1-integration-through-relative-paths">Option 1: integration through relative paths</a></li>
+<li class="toctree-l2"><a class="reference internal" href="application_recipes.html#option-2-integration-through-environment-variables">Option 2: integration through environment variables</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="license.html">Copyright / License information</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">CoRTEX-ADTF2Generator</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="index.html">Docs</a> &raquo;</li>
+        
+      <li>General information</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="_sources/general.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="general-information">
+<h1><a class="toc-backref" href="#id1">General information</a><a class="headerlink" href="#general-information" title="Permalink to this headline">¶</a></h1>
+<div class="contents topic" id="contents">
+<p class="topic-title first">Contents</p>
+<ul class="simple">
+<li><p><a class="reference internal" href="#general-information" id="id1">General information</a></p>
+<ul>
+<li><p><a class="reference internal" href="#prerequisites" id="id2">Prerequisites</a></p></li>
+<li><p><a class="reference internal" href="#preamble" id="id3">Preamble</a></p></li>
+<li><p><a class="reference internal" href="#conclusion" id="id4">Conclusion</a></p></li>
+<li><p><a class="reference internal" href="#application-example" id="id5">Application example</a></p></li>
+</ul>
+</li>
+<li><p><a class="reference internal" href="#use-cases-covered-by-the-adtf2generator" id="id6">Use cases covered by the ADTF2Generator</a></p>
+<ul>
+<li><p><a class="reference internal" href="#installing-and-starting-a-published-adtf-configuration" id="id7">Installing and starting a published ADTF configuration</a></p></li>
+<li><p><a class="reference internal" href="#editing-a-local-adtf-configuration" id="id8">Editing a local ADTF configuration</a></p></li>
+</ul>
+</li>
+</ul>
+</div>
+<p>This is the documentation of a <a class="reference external" href="https://conan.io">Conan.io</a> generator for ADTF2 Filters, Services, Configurations/Projects, Descriptions, and Custom Launcher Manifests.
+See <a class="reference external" href="https://docs.conan.io">Conan.io docs</a> for more information.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The “General/basics” chapter should be read beforehand, especially to facilitate understanding of the functionality.</p>
+</div>
+<div class="admonition attention">
+<p class="admonition-title">Attention</p>
+<p><strong>Note for usage/compatibility</strong>
+This generator does NOT work in Conan 1.4.x due to an error in Conan</p>
+</div>
+<div class="section" id="prerequisites">
+<h2><a class="toc-backref" href="#id2">Prerequisites</a><a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h2>
+<p>This custom Conan generator requires a Conan package named ADTF with major version ‘2’ (e.g. ADTF/2.14.3&#64;&lt;user&gt;/&lt;channel&gt;).
+Sadly we cannot directly provide such a package due to license and distribution permission issues.</p>
+<p>Please contact the ADTF distributor Digitalwerk GmbH via <a class="reference external" href="mailto:support&#37;&#52;&#48;digitalwerk&#46;net">support<span>&#64;</span>digitalwerk<span>&#46;</span>net</a> to get a license and download link at least for the ADTF 2 installer packages.
+Probably they may also provide an ADTF 2 Conan package (which is not guaranteed).</p>
+</div>
+<div class="section" id="preamble">
+<h2><a class="toc-backref" href="#id3">Preamble</a><a class="headerlink" href="#preamble" title="Permalink to this headline">¶</a></h2>
+<p>During the Conan install command or the Conan install phase, a Conan generator generates files with different content depending on the generator, e.g. package directories. Most generators use the information defined in the package_info(). This method is the only and official point for providing information to other packages and generators. Effectively, it is the only official information interface regarding package content.</p>
+<p><strong>The basic problem during development with Conan:</strong></p>
+<p>The information from the <cite>package_info()</cite> method is only available to packages in the local_cache, as the <cite>package_info()</cite> method is only executed for packages already generated. Often, this method also includes a reference/path information to <cite>package_folder</cite>, e.g. for defining paths to libraries. The package_folder, however, is only really known and available in the local_cache.</p>
+</div>
+<div class="section" id="conclusion">
+<h2><a class="toc-backref" href="#id4">Conclusion</a><a class="headerlink" href="#conclusion" title="Permalink to this headline">¶</a></h2>
+<p>This means that generators can only collect information from packages in the <cite>local_cache</cite>. If this is considered with regard to the development of an individual package (e.g. a library, an ADTF filter), generators can only determine the information of all dependencies and write this to different files (e.g. the CMake generator generates a conanbuildinfo.cmake with paths to all dependencies). There is only limited access to the information of the own product, though.</p>
+</div>
+<div class="section" id="application-example">
+<h2><a class="toc-backref" href="#id5">Application example</a><a class="headerlink" href="#application-example" title="Permalink to this headline">¶</a></h2>
+<p><strong>local development:</strong> <cite>conan install . &lt;other_settings_options_flags&gt;</cite> loads the recipe from the current directory, installs all dependencies, and generates data according to the current generators; which then, however, do NOT (cannot) access the <cite>package_info()</cite> of the current recipe, because the product itself has not yet been built or at least checked out (if recipe is not in the same repository). This is completely sufficient for the development of a package, as all dependencies were installed and referenced in the generated files. This means that development can start.</p>
+<ol class="arabic simple">
+<li><p><cite>conan install &lt;…&gt;</cite> - install dependencies and generate files</p></li>
+<li><p><cite>conan source &lt;…&gt;</cite> - download/check out sources (if required)</p></li>
+<li><p><cite>conan build &lt;…&gt;</cite> - build sources</p></li>
+<li><p>…</p></li>
+</ol>
+<img alt="_images/image001.png" src="_images/image001.png" />
+<p><strong>Installing a reference:</strong> <cite>conan install &lt;myReference/1.2.3&#64;user/channel&gt; &lt;other_settings_options_flags&gt;</cite> fundamentally acts in a similar manner to that described in <em>“local development”</em>. The difference, however, is that Conan internally defines a “virtual” local project reference that depends on the package.
+The difference is best illustrated with the Conan info command for generating a graph:</p>
+<img alt="_images/image002.png" src="_images/image002.png" />
+<p>This means that the <cite>package_info()</cite> method and the contained information can be accessed only in the second case.</p>
+</div>
+</div>
+<div class="section" id="use-cases-covered-by-the-adtf2generator">
+<h1><a class="toc-backref" href="#id6">Use cases covered by the ADTF2Generator</a><a class="headerlink" href="#use-cases-covered-by-the-adtf2generator" title="Permalink to this headline">¶</a></h1>
+<p>The ADTF2Generator uses the official package description (<cite>package_info()</cite>) to determine all paths to relevant dependencies, and generates all required files (ADTF manifests, globals.xml and start scripts) for each ADTF configuration. To do this, the packages have to provide the information explicitly, i.e. an ADTF plugin package has to explicitly define the paths to the <cite>.plb</cite> files, an ADTF service package has to explicitly define the paths to the <cite>*.manifest</cite> , an ADTF configuration has to explicitly define the paths to the <cite>*.prj</cite> and/or <cite>system.xml</cite> file, as well as other optional settings. Automatic determining of paths (e.g. by mindlessly searching all packages for <cite>*.plb</cite> or <cite>*.manifest</cite> or <cite>*.prj</cite>) was omitted, as libraries or executables also have to be defined explicitly in Conan.</p>
+<div class="section" id="installing-and-starting-a-published-adtf-configuration">
+<h2><a class="toc-backref" href="#id7">Installing and starting a published ADTF configuration</a><a class="headerlink" href="#installing-and-starting-a-published-adtf-configuration" title="Permalink to this headline">¶</a></h2>
+<p>The user wants to download an already published ADTF configuration to their own computer and start it. It therefore has to be ensured that all dependencies that use the package_info() to explicitly identify themselves as ADTF filter, ADTF service and/or ADTF configuration, are determined and that their paths are correctly entered into the files to be generated.</p>
+<p>The user has to execute the following command (using the example of csvmultiarray_config):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># Windows command using Visual Studio 2010 binaries</span>
+conan install csvmultiarray_config/1.0.0@CoRTEX/stable -g ADTF2Generator -s <span class="nv">compiler</span><span class="o">=</span><span class="s2">&quot;Visual Studio&quot;</span> -s compiler.version<span class="o">=</span><span class="m">10</span>
+<span class="c1"># Linux command using gcc 4.6 binaries</span>
+conan install csvmultiarray_config/1.0.0@CoRTEX/stable -g ADTF2Generator -s <span class="nv">compiler</span><span class="o">=</span>gcc -s compiler.version<span class="o">=</span><span class="m">4</span>.6
+</pre></div>
+</div>
+<p>All dependencies are processed and downloaded and the ADTF2Generator generates the following files in the current working directory:</p>
+<img alt="_images/image003.png" src="_images/image003.png" />
+<p>These data are generated in ADTF_gen:</p>
+<img alt="_images/image004.png" src="_images/image004.png" />
+<p>Now, the user can execute one of the generated <cite>adtf_*.bat</cite> or <cite>adtf_*.sh</cite> files in the following step, and ADTF is started. If necessary, additional parameters, e.g. <cite>-run</cite> or <cite>-stdout</cite>, can be transferred to the generated start scripts. These parameters are transferred directly to ADTF.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>adtf_devenv_csvmultiarray_config.bat -run
+</pre></div>
+</div>
+<p>The non-project specific files (e.g. <cite>adtf_devenv.bat</cite>, <cite>adtf_runtime.bat</cite>) are generated without a project reference. This means that, while the dependencies from the ADTF services and ADTF filters are included, no project is loaded. This is interesting/relevant in particular if the filters of the current dependency graph are to be used to generate/load a new configuration, or if the developer wants to edit a configuration checked out from the SCM system (see second use case).</p>
+</div>
+<div class="section" id="editing-a-local-adtf-configuration">
+<h2><a class="toc-backref" href="#id8">Editing a local ADTF configuration</a><a class="headerlink" href="#editing-a-local-adtf-configuration" title="Permalink to this headline">¶</a></h2>
+<p>Based on the fundamental problem in Conan described above, start scripts can only be generated directly for ADTF configurations that are published or are located in the local_cache.</p>
+<p>Nevertheless, the ADTF2Generator also generates more or less universal start scripts based on the dependency graphs for the Conan file to be processed. The prerequisite for this is of course a clear and correct definition of the dependencies (required ADTF filters, ADTF services, etc.) and that these provide the <cite>package_info()</cite> according to the requirements.</p>
+<p>The developer would work as follows (assuming that he is in the directory of the Conan recipe for the ADTF configuration):</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="c1"># create a working directory</span>
+current_recipe_dir&gt; mkdir _install
+<span class="c1"># change into the working directory</span>
+current_recipe_dir&gt; <span class="nb">cd</span> _install
+<span class="c1"># call conan install with the ADTF2Generator and other settings and options</span>
+current_recipe_dir<span class="se">\_</span>install&gt; conan install .. -g ADTF2Generator -s compiler.version<span class="o">=</span><span class="m">10</span> -s <span class="nv">compiler</span><span class="o">=</span><span class="s2">&quot;Visual Studio&quot;</span> &lt;additional_options_settings_flags&gt;
+<span class="c1"># call conan source to get the ADTF configuration from SCM system (git clone&amp;checkout or svn checkout)</span>
+current_recipe_dir<span class="se">\_</span>install&gt; conan <span class="nb">source</span> .. <span class="c1"># if required</span>
+<span class="c1"># start the ADTF development environment and MANUALLY open/create a new project</span>
+current_recipe_dir<span class="se">\_</span>install&gt; adtf_devenv.bat
+</pre></div>
+</div>
+<p>This would be generated as a local working directory</p>
+<img alt="_images/image005.png" src="_images/image005.png" />
+<p>in which the non-project specific start scripts are then generated.</p>
+<img alt="_images/image006.png" src="_images/image006.png" />
+<p>The developer can now create a new ADTF project or change the project checked out from the SCM system.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>ADTF settings should <em>ALWAYS</em> be made in the <cite>system.xml</cite>, but <em>NOT</em> in the <cite>globals.xml</cite>. The <cite>globals.xml</cite> is regenerated with each generator run, and the settings will therefore be lost.
+For usage of a custom <cite>globals.xml</cite> see “Definition of an ADTF project”.</p>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="application_recipes.html" class="btn btn-neutral float-right" title="Application in Conan recipes" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="CoRTEX - ADTF2Generator" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2019, Audi Electronics Venture GmbH
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
