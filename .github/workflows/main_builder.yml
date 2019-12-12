@@ -28,11 +28,11 @@ jobs:
         ls -la $GITHUB_WORKSPACE/../_tmp && \
         echo ***** Doc build done *****
     - name: Skip commit if not master branch
-      if: github.ref != '/refs/heads/master'
+      if: github.ref != 'refs/heads/master'
       run: |
         echo Skipping deploy of built documentation
     - name: Commit changes back to repo
-      if: github.ref == '/refs/heads/master'
+      if: github.ref == 'refs/heads/master'
       run: |
         git config --global user.name 'aev-oss-techniscal-user'
         git config --global user.email 'aev-oss-techniscal-user@users.noreply.github.com'
