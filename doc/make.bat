@@ -27,11 +27,6 @@ if errorlevel 9009 (
 )
 
 %SPHINXBUILD% -M %1 %SOURCEDIR% %BUILDDIR% %SPHINXOPTS% %O%
-echo copy /Y %BUILDDIR%\html %DOCSDIR%
-rmdir /S /Q %DOCSDIR%
-mkdir %DOCSDIR%
-xcopy /S /Y %BUILDDIR%\html\* %DOCSDIR%
-del /F %DOCSDIR%\.buildinfo
 goto end
 
 :help

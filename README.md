@@ -9,7 +9,7 @@ file, You can obtain one at http://mozilla.org/MPL/2.0/.
 
 # CoRTEX-ADTF2Generator - Conan Generator for ADTF2 Filters, Services, Configurations/Projects, Descriptions, and Custom Launcher Manifests
 
-![CoRTEX logo](docs_source/icons/CoRTEX_lettering.png)
+![CoRTEX logo](doc/icons/CoRTEX_lettering.png)
 
 CoRTEX is a project which extends the base functionalities of [Conan](https://conan.io). We will provide more information as soon as possible.
 
@@ -17,7 +17,7 @@ This specific project contains a custom Conan generator for ADTF 2.x - Automotiv
 
 ## Documentation
 
-See [GH-Pages](https://aev.github.io/CoRTEX_ADTF2Generator/)
+See [GitHub-Pages](https://aev.github.io/CoRTEX_ADTF2Generator/). You may also find more information about the prerequisites (e.g. ADTF Conan package).
 
 ## Contribution
 
