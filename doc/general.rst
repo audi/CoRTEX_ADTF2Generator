@@ -18,6 +18,17 @@ See `Conan.io docs <https://docs.conan.io>`_ for more information.
 .. attention:: **Note for usage/compatibility** 
     This generator does NOT work in Conan 1.4.x due to an error in Conan
 
+Prerequisites
+*************
+
+This custom Conan generator requires a Conan package named ADTF with major version '2' (e.g. ADTF/2.14.3@<user>/<channel>). 
+Sadly we cannot directly provide such a package due to license and distribution permission issues.
+
+Please contact the ADTF distributor Digitalwerk GmbH via support@digitalwerk.net to get a license and download link at least for the ADTF 2 installer packages. 
+Probably they may also provide an ADTF 2 Conan package (which is not guaranteed).
+
+Preamble
+********
 
 During the Conan install command or the Conan install phase, a Conan generator generates files with different content depending on the generator, e.g. package directories. Most generators use the information defined in the package_info(). This method is the only and official point for providing information to other packages and generators. Effectively, it is the only official information interface regarding package content.
 

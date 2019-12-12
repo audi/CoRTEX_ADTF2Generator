@@ -12,7 +12,7 @@ Contribution
 
 [meaningful variable names]: https://medium.com/coding-skills/clean-code-101-meaningful-names-and-functions-bf450456d90c
 
-[commit message template]: .gitmessage_template
+[commit message template]: .github/.gitmessage_template
 
 ## Code guidelines <a name="code-guidelines"></a>
 

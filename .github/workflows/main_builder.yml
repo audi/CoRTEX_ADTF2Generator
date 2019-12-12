@@ -1,0 +1,50 @@
+name: builder
+
+on: push
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-python@v1
+      with:
+        python-version: 3.6
+        architecture: x64
+    - name: Install requirements
+      run: |
+        pip install -r requirements.txt
+    - name: create Generator
+      run: |
+        conan create . CoRTEX/testing
+    - name: Create docs html
+      run: |
+        echo Building in $GITHUB_WORKSPACE
+        ls -la $GITHUB_WORKSPACE/..
+        mkdir $GITHUB_WORKSPACE/../_tmp && \
+        cd $GITHUB_WORKSPACE/doc && export BUILDDIR=$GITHUB_WORKSPACE/../_tmp && make html && \
+        ls -la $GITHUB_WORKSPACE/../_tmp && \
+        echo ***** Doc build done *****
+    - name: Skip commit if not master branch
+      if: github.ref != '/refs/heads/master'
+      run: |
+        echo Skipping deploy of built documentation
+    - name: Commit changes back to repo
+      if: github.ref == '/refs/heads/master'
+      run: |
+        git config --global user.name 'aev-oss-techniscal-user'
+        git config --global user.email 'aev-oss-techniscal-user@users.noreply.github.com'
+        git remote set-url origin https://x-access-token:${{ secrets.AEV_OSS_TOKEN }}@github.com/$GITHUB_REPOSITORY
+        git checkout gh-pages
+        git rm -rf .
+        cp -r $GITHUB_WORKSPACE/../_tmp/html/* $GITHUB_WORKSPACE
+        touch .nojekyll
+        echo This is the 'gh-pages' branch for $GITHUB_REPOSITORY built by GitHub actions > README
+        git add .
+        git diff
+        ls -la $GITHUB_WORKSPACE
+        git diff --exit-code && git commit -am "automated docs build"  || echo unable to commit changes or no changes found
+        git push origin
+      
