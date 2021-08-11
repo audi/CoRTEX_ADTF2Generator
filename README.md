@@ -1,3 +1,10 @@
+## ℹ️ This repository is archived 
+
+It is now maintained at https://github.com/cariad-tech
+
+
+---
+
 <!---
 Copyright (c) 2019 Audi Electronics Venture GmbH. All Rights Reserved.
 
